@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GST Quiz Game</title>
+  
+  <style>
+  body {
+    background-color: #2b2e2e;
+    background-image: url("GST2.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Add this to make the score element positioned relative to the body */
+  }
+
+  #score {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  #quiz-container {
+    width: 600px;
+    margin: 0 auto;
+    margin-left: 180px;
+    text-align: center;
+    z-index: 2;
+  }
+
+  #quiz-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h1 {
+    background-color: rgb(0, 0, 0);
+    color: beige;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(0, 0, 0);
+    width: 500px;
+    margin: 0 auto;
+    font-size: 50px;
+  }
+
+  #question {
+    font-size: 55px;
+    font-weight: bolder;
+    color: rgb(62, 43, 41);
+  }
+
+  #answers button {
+    margin: 8px;
+    padding: 12px 24px;
+    background-color: #cc761a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 70%;
+    font-size: 16px;
+    box-shadow: 5px 5px rgb(24, 106, 228);
+  }
+
+  #answers button:hover {
+    background-color: #2b2e2e;
+  }
+  footer{
+    border: 3px solid rgb(156, 67, 67);
+    font-size: 20px;
+    position: absolute;
+    top: 650px;
+    left: 2px;
+  }
+</style>
+
+</head>
+<body>
+  <div id="score">Score: <span id="current-score">0</span></div>
+  <div id="quiz-container">
+    <h1>GST Quiz Game</h1>
+    <form id="quiz-form">
+      <p id="question"></p>
+      <div id="answers"></div>
+    </form>
+  </div>
+  
+  <footer>
+    Created By: <br>
+    Name: Akshat Sharma <br>
+    Reg. No: 21BCG10091
+  </footer>
+  
+</body>
+<script>
+  const questions = [
+    {
+        question: "What is GST?",
+        answers: {
+            a: "Global Sales Tax",
+            b: "Goods and Service Tax",
+            c: "Government Sales Tax",
+            d: "General Service Tax"
+        },
+        correctAnswer: "b"
+    },
+    {
+        question: "What is the GST rate for most goods and services?",
+        answers: {
+            a: "5%",
+            b: "12%",
+            c: "18%",
+            d: "28%"
+        },
+        correctAnswer: "c"
+    },
+    {
+        question: "Which of the following taxes have been subsumed under GST?",
+        answers: {
+            a: "Value Added Tax (VAT)",
+            b: "Central Excise Duty",
+            c: "Service Tax",
+            d: "All of the above"
+        },
+        correctAnswer: "d"
+    },
+    {
+        question: "What is the GST composition scheme?",
+        answers: {
+            a: "A scheme for small businesses to pay lower taxes",
+            b: "A scheme for large businesses to pay higher taxes",
+            c: "A scheme for exporters to claim tax refunds",
+            d: "A scheme for consumers to claim tax credits"
+        },
+        correctAnswer: "a"
+    },
+    {
+        question: "What is the threshold limit for GST registration in India for businesses involved in the supply of goods?",
+        answers: {
+            a: "Rs. 20 lakhs",
+            b: "Rs. 40 lakhs",
+            c: "Rs. 50 lakhs",
+            d: "Rs. 1 crore"
+        },
+        correctAnswer: "a"
+    },
+    {
+        question: "Which of the following is a type of GST return that has to be filed monthly?",
+        answers: {
+            a: "GSTR-1",
+            b: "GSTR-5",
+            c: "GSTR-9B",
+            d: "GSTR-9"
+        },
+        correctAnswer: "b"
+    },
+    {
+        question: "What is the due date for filing GSTR-3B in India?",
+        answers: {
+            a: "10th of the following month",
+            b: "20th of the following month",
+            c: "15th of the following month",
+            d: "25th of the following month"
+        },
+        correctAnswer: "b"
+    },
+    {
+        question: "Which of the following items is exempt from GST in India?",
+        answers: {
+            a: "Fruits and vegetables",
+            b: "Meat and poultry products",
+            c: "Dairy products",
+            d: "All of the above"
+        },
+        correctAnswer: "d"
+    },
+    {
+        question: "What is the purpose of the e-way bill in the context of GST?",
+        answers: {
+            a: "To track the movement of goods",
+            b: "To track the payment of taxes",
+            c: "To track the input tax credit",
+            d: "To track the composition scheme"
+        },
+        correctAnswer: "a"
+    },
+    {
+        question: "Which authority is responsible for the administration of GST in India?",
+        answers: {
+            a: "Central Board of Direct Taxes (CBDT)",
+            b: "Central Board of Excise and Customs (CBEC)",
+            c: "Central Board of Indirect Taxes and Customs (CBIC)",
+            d: "Central Board of Direct Taxes and Customs (CBDTC)"
+        },
+        correctAnswer: "c"
+    },
+    {
+        question: "What is the penalty for late filing of GST returns in India?",
+        answers: {
+            a: "Rs. 50 per day",
+            b: "Rs. 100 per day",
+            c: "Rs. 500 per day",
+            d: "Rs. 1000 per day"
+        },
+        correctAnswer: "b"
+    }
+    
+];
+
+let currentQuestionIndex = 0;
+let score = 0;
+
+function displayQuestion() {
+    // get the current question
+    const currentQuestion = questions[currentQuestionIndex];
+    // update the question text
+    const questionElement = document.getElementById("question");
+    questionElement.textContent = currentQuestion.question;
+    // clear any existing answer choices
+    const answersElement = document.getElementById("answers");
+    answersElement.innerHTML = "";
+    // display the answer choices
+    for (const key in currentQuestion.answers) {
+        const answer = currentQuestion.answers[key];
+        const button = document.createElement("button");
+        button.type = "button";
+        button.value = key;
+        button.textContent = answer;
+        button.addEventListener("click", selectAnswer);
+        answersElement.appendChild(button);
+    }
+}
+
+function selectAnswer(event) {
+    // get the selected answer
+    const selectedAnswer = event.target.value;
+    // check if it is correct
+    const currentQuestion = questions[currentQuestionIndex];
+    if (selectedAnswer === currentQuestion.correctAnswer) {
+        score++;
+    } else {
+        alert(`The correct answer is "${currentQuestion.answers[currentQuestion.correctAnswer]}"`);
+    }
+    // move on to the next question
+    currentQuestionIndex++;
+    if (currentQuestionIndex === questions.length) {
+        location.reload();
+        return;
+    }
+    displayQuestion();
+    displayScore();
+}
+
+function displayScore() {
+    // show the current score
+    const scoreElement = document.getElementById("score");
+    scoreElement.textContent = `Score: ${score} out of ${questions.length}`;
+}
+
+// start the quiz
+displayQuestion();
+displayScore();
+
+</script>
+</html>
